@@ -1,0 +1,20 @@
+{
+  "plugins": ["@babel/plugin-transform-runtime"],
+  "env": {
+    "coverage": {
+      "plugins": [
+        "babel-plugin-espower",
+        ["istanbul", {
+          exclude: "js_test/**/*.js"
+        }],
+        "rewire"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "babel-plugin-espower",
+        "rewire"
+      ]
+    }
+  }
+}
