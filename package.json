@@ -52,7 +52,7 @@
     "webpack-dev-server": "^3.1.0"
   },
   "scripts": {
-    "eslint": "./node_modules/eslint/bin/eslint.js --fix 'web/static/**/*.js' 'web/static/**/*.vue' 'js_test/**/*.js' 'training_src/**/*.js' 'training_src/**/*.vue'",
+    "eslint": "./node_modules/eslint/bin/eslint.js --fix 'web/static/**/*.js' 'web/static/**/*.vue' 'js_test/**/*.js'",
     "webpack-dev-server": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "karma": "BABEL_ENV=test node --max_old_space_size=4096 ./node_modules/karma-cli/bin/karma start",
     "karma-with-coverage": "BABEL_ENV=coverage node --max_old_space_size=4096 ./node_modules/karma-cli/bin/karma start",
