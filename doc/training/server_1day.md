@@ -4,7 +4,7 @@
 
 * `Question` APIとして下記のAPIを実装する
   * `createQuestion API`       (`POST /v1/question`)
-  * `updateQuestion API`       (`POST /v1/question/{id}`)
+  * `updateQuestion API`       (`PUT /v1/question/{id}`)
 
 ## ヒント
 
