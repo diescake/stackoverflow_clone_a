@@ -58,7 +58,7 @@ defmodule StackoverflowCloneA.Controller.Question.Update do
       #更新
       case res do
         %Dodai.UpdateDedicatedDataEntitySuccess{body: dc} -> Conn.json(conn, 200, Helper.to_response_body(dc))
-        %Dodai.ResourceNotFound{} -> ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
+        _ -> ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
       end
     
       
