@@ -9,14 +9,14 @@ defmodule StackoverflowCloneA.Controller.Answer.Create do
   
 
   def create(%Antikythera.Conn{ assigns: %{me: me}, request: %Antikythera.Request{ body: body} }  = conn) do
-    IO.inspect conn
-    IO.inspect body
-    IO.inspect me
+    # IO.inspect conn
+    # IO.inspect body
+    # IO.inspect me
 
     #idの取得
     user_id = me["_id"]
 
-    IO.inspect user_id
+    # IO.inspect user_id
 
 
     #questionがあるか確認
@@ -34,9 +34,9 @@ defmodule StackoverflowCloneA.Controller.Answer.Create do
 
   #回答の作成
   def request_anser(conn, id, body) do
-    IO.inspect conn
-    IO.inspect id
-    IO.inspect body
+    # IO.inspect conn
+    # IO.inspect id
+    # IO.inspect body
 
     #dataの作成
     data = %{
