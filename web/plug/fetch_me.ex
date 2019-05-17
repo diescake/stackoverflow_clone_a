@@ -1,3 +1,8 @@
+
+# これはAntikytheraとDodaiの間でのやりとり
+# クライアントからリクエストがきたが、送られてきたcredentialが誰かをDodaiが教えてくれる
+
+
 use Croma
 
 defmodule StackoverflowCloneA.Plug.FetchMe do

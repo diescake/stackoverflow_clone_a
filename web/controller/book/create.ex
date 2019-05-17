@@ -17,6 +17,7 @@ defmodule StackoverflowCloneA.Controller.Book.Create do
   alias StackoverflowCloneA.Controller.Book.{Helper, CreateRequestBody}
 
   defun create(%Conn{request: %Request{body: body}, context: context} = conn) :: Conn.t do
+    IO.inspect context
     case CreateRequestBody.new(body) do
       {:error, _}      ->
         ErrorJson.json_by_error(conn, BadRequestError.new())
