@@ -6,7 +6,7 @@
   * `retrieveQuestionList API` (`GET  /v1/question`)
     * API自体はすでにあるが、request parameterとして`user_id`が指定された場合は、その指定された値をもつquestionのみを返すように拡張する。
 * `Answer` APIとして下記のAPIを実装する
-  * `retrieveAnswer API`     (`GET  /v1/answer/{id}`)
+  * `retrieveAnswerList API`     (`GET  /v1/answer`)
     * API自体はすでにあるが、request parameterとして`user_id`または`question_id`が指定された場合は、その指定された値をもつanswerのみを返すように拡張する。
 
 ## ヒント
