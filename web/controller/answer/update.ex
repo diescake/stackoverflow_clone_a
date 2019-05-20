@@ -54,8 +54,6 @@ defmodule StackoverflowCloneA.Controller.Answer.Update do
 
       req = Dodai.UpdateDedicatedDataEntityRequest.new(SD.default_group_id(), Helper.collection_name(), ans_id, SD.root_key(), req_body)
 
-      IO.inspect "#3"
-      
       res = Sazabi.G2gClient.send(conn.context, SD.app_id(), req)
 
       case res do
