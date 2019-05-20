@@ -26,7 +26,8 @@ defmodule StackoverflowCloneA.Controller.Question.Create do
     req = Dodai.CreateDedicatedDataEntityRequest.new(SD.default_group_id(), Helper.collection_name(), SD.root_key(), req_body)
     res = Sazabi.G2gClient.send(conn.context, SD.app_id(), req)
 
-    IO.inspect res
+
+    # IO.inspect res
 
     # エラー処理
     case res do
