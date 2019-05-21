@@ -1,6 +1,6 @@
 %{
   "antikythera": {:git, "git@github.com:access-company/antikythera.git", "9d00621323bf2031b9c3d41089f67fbea9bd5300", [ref: "9d00621323bf2031b9c3d41089f67fbea9bd5300"]},
-  "antikythera_acs": {:git, "git@github.com:access-company/antikythera_acs.git", "4bef73ba9868efa3d28716876b6964562c3d1372", []},
+  "antikythera_acs": {:git, "git@github.com:access-company/antikythera_acs.git", "1b09aba428ee8762c65687ef9f279dfdaed4e749", []},
   "antikythera_aws": {:hex, :antikythera_aws, "0.1.2", "fe9eaeed765d9029b3434f98866f9d20a4fadfea52f18ad3930ea3c58a5b54c5", [:mix], [{:antikythera, "~> 0.2", [hex: :antikythera, repo: "hexpm", optional: false]}], "hexpm"},
   "base64url": {:hex, :base64url, "0.0.1", "36a90125f5948e3afd7be97662a1504b934dd5dac78451ca6e9abf85a10286be", [:rebar], [], "hexpm"},
   "batched_communication": {:hex, :batched_communication, "0.1.5", "3288e8428d1c6af9b326b1255494d5b62a4b430b1324cb186f9de6ee37430957", [:mix], [{:croma, "~> 0.9", [hex: :croma, repo: "hexpm", optional: false]}], "hexpm"},
