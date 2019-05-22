@@ -29,14 +29,14 @@ defmodule StackoverflowCloneA.Controller.Comment.Create do
     random = RandomString.stream(:alphanumeric) |> Enum.take(20) |> List.to_string
     
     comments = [%{
-        "id"         => random,        # 上記の方法でランダムな文字列を生成
+        "_id"         => random,        # 上記の方法でランダムな文字列を生成
         "user_id"    => me["_id"],         # login userの`_id`
         "body"       => body,              # userが指定した値
         "created_at" => me["createdAt"],   # comment作成時の時刻 
     }]
 
     # 作成したいCommentの内容の確定
-    req_body = %Dodai.CreateDedicatedDataEntityRequestBody{data: %{"$set" => %{"comments" => q_res_comment ++ comments}}}
+    req_body = %Dodai.UpdateDedicatedDataEntityRequestBody{data: %{"$set" => %{"comments" => q_res_comment ++ comments}}}
     # dodaiにリクエストするためには何が必要？それの準備
     req = Dodai.UpdateDedicatedDataEntityRequest.new(SD.default_group_id(), coll, id, SD.root_key(), req_body)
     # 実行
