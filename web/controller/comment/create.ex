@@ -14,7 +14,6 @@ defmodule StackoverflowCloneA.Controller.Comment.Create do
   plug StackoverflowCloneA.Plug.FetchMe, :fetch, []
 
   def create(%Antikythera.Conn{assigns: %{me: me}, request: %Antikythera.Request{body: %{"body" => body}, path_info: path_info, path_matches: %{document_id: id}}} = conn) do
-    # IO.inspect conn
 
     coll = String.capitalize(Enum.at(path_info, 1))
 
@@ -24,24 +23,17 @@ defmodule StackoverflowCloneA.Controller.Comment.Create do
     q_req = Dodai.RetrieveDedicatedDataEntityRequest.new("g_HtEsAbX7", coll, id, "rkey_0ywy9jSuXktTvzF")
       # 実行
     q_res = Sazabi.G2gClient.send(conn.context, "a_BvqzN73e", q_req)
-    # IO.inspect q_res
-
-
-    # IO.inspect q_res.body["data"]["comments"]
 
     q_res_comment = q_res.body["data"]["comments"]
 
     random = RandomString.stream(:alphanumeric) |> Enum.take(20) |> List.to_string
-    # IO.inspect random
     
-
     comments = [%{
         "id"         => random,        # 上記の方法でランダムな文字列を生成
         "user_id"    => me["_id"],         # login userの`_id`
         "body"       => body,              # userが指定した値
         "created_at" => me["createdAt"],   # comment作成時の時刻 
     }]
-    # IO.inspect data
 
     # 作成したいCommentの内容の確定
     req_body = %Dodai.CreateDedicatedDataEntityRequestBody{data: %{"$set" => %{"comments" => q_res_comment ++ comments}}}
