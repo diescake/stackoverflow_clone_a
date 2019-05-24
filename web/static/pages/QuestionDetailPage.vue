@@ -1,6 +1,8 @@
 <template>
   <div>
-    !not_implemented!
+    <div v-if="hasValidQuestion">
+      <question :question="question" />
+    </div>
   </div>
 </template>
 
@@ -18,11 +20,27 @@ export default {
     return {
     };
   },
+
   computed: {
+    // 同じquetionかどうかの確認
+    hasValidQuestion() {
+      return !(Object.keys(this.question).length === 0) && this.question.id === this.$route.params.id;
+    },
+    question() {
+      return this.$store.state.question;
+    },
   },
+
+  // ライフサイクルで先にdom構築をする時に呼ばれる
   mounted() {
+    this.retrieveQuestion();
   },
+
+  // functionの格納
   methods: {
+    retrieveQuestion() {
+      this.$store.dispatch('retrieveQuestion', { id: this.$route.params.id });
+    },
   },
 };
 </script>
