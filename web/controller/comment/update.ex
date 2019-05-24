@@ -17,12 +17,12 @@ defmodule StackoverflowCloneA.Controller.Comment.Update do
     #commentのid
     comments_id = path_matches.id
 
-    # IO.inspect conn
-    # IO.inspect body
-    # IO.inspect coll
-    # IO.inspect doc_id
-    # IO.inspect comments_id
-    # IO.inspect "/////////////////"
+    IO.inspect conn
+    IO.inspect body
+    IO.inspect coll
+    IO.inspect doc_id
+    IO.inspect comments_id
+    IO.inspect "/////////////////"
     
 
     # ans or quetionがあるか確認
@@ -32,26 +32,14 @@ defmodule StackoverflowCloneA.Controller.Comment.Update do
       %Dodai.RetrieveDedicatedDataEntitySuccess{body: doc} -> 
         comm_result = comm_def(doc["data"]["comments"], comments_id)
 
-        # commnetsの有無
-        if Enum.empty?(comm_result) do
-          ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
-        
+        IO.inspect "#1"
+        IO.inspect comm_result
 
-        else #commentsがあった場合
-          #コメントを全取得してから、特定のコメントを更新後、そのlistを投げる?
-          comms = doc["data"]["comments"]
+        if comm_result do
+          IO.inspect "#2"
+          IO.inspect comm_result
 
-          update_comms = Enum.map(comms, fn(t) ->
-            if t["_id"] == comments_id do
-              put_in(t, ["body"], body["body"])
-            else
-              t
-            end
-          end)
-
-          #コメントのアップデート
-          comments_update_result = comments_func(conn, coll, doc_id, update_comms)
-
+          comments_update_result = comments_func( conn, coll ,doc_id ,body["body"], comm_result )
 
           case comments_update_result do
             %Dodai.UpdateDedicatedDataEntitySuccess{body: doc} -> 
@@ -60,8 +48,35 @@ defmodule StackoverflowCloneA.Controller.Comment.Update do
 
             _ -> ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
           end
+
+        else
+          #nillだったばあい
+          ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
+
+          
+
         end
-      
+
+        # commnetsの有無
+        # if Enum.empty?(comm_result) do
+        #   ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
+        
+
+        # else #commentsがあった場合
+        #   #コメントを全取得してから、特定のコメントを更新後、そのlistを投げる?
+        #   comms = doc["data"]["comments"]
+
+        #   update_comms = Enum.map(comms, fn(t) ->
+        #     if t["_id"] == comments_id do
+        #       put_in(t, ["body"], body["body"])
+        #     else
+        #       t
+        #     end
+        #   end)
+
+        #   #コメントのアップデート
+        #   comments_update_result = comments_func(conn, coll, doc_id, update_comms)
+
       _ -> ErrorJson.json_by_error(conn, ResourceNotFoundError.new())
     end
     
@@ -77,12 +92,19 @@ defmodule StackoverflowCloneA.Controller.Comment.Update do
   # commentsがあるか確認
   def comm_def(comments, id) do
     #commentsnの存在確認
-    Enum.filter(comments, fn(x) -> x["_id"] == id end)
+    # Enum.filter(comments, fn(x) -> x["_id"] == id end)
+
+    Enum.find_index(comments, fn(x) -> x["_id"] == id end)
   end
 
   #commentsのアップデート関数
-  def comments_func(conn, coll, id, comments) do
-    req_body = %Dodai.UpdateDedicatedDataEntityRequestBody{data: %{"$set" => %{"comments" => comments}  }}
+  def comments_func(conn, coll, id, body, index) do
+
+    # req_body = %Dodai.UpdateDedicatedDataEntityRequestBody{data: %{"$set" => %{"comments" => comments}  }}
+    # req = Dodai.UpdateDedicatedDataEntityRequest.new(SD.default_group_id(), coll, id, SD.root_key(), req_body)
+    # Sazabi.G2gClient.send(conn.context, SD.app_id(), req)
+
+    req_body = %Dodai.UpdateDedicatedDataEntityRequestBody{data: %{"$set" => %{"comments." <> Integer.to_string(index) <> ".body" => body}  }}
 
     req = Dodai.UpdateDedicatedDataEntityRequest.new(SD.default_group_id(), coll, id, SD.root_key(), req_body)
           
