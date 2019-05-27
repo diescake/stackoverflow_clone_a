@@ -2,6 +2,13 @@
   <div>
     <div v-if="hasValidQuestion">
       <question :question="question" />
+
+      <div
+        v-for="(comment, index) in question.comments"
+        :key="`comment_id-${index}`"
+      >
+        <comment :comment="comment" />
+      </div>
     </div>
   </div>
 </template>
@@ -9,12 +16,14 @@
 <script>
 import Question from '@/components/Question';
 import Answer from '@/components/Answer';
+import Comment from '@/components/Comment';
 
 export default {
   name: 'QuestionDetailPage',
   components: {
     Question,
     Answer,
+    Comment,
   },
   data() {
     return {
@@ -29,6 +38,11 @@ export default {
     question() {
       return this.$store.state.question;
     },
+
+    commetns() {
+      return this.question.comments;
+    },
+
   },
 
   // ライフサイクルで先にdom構築をする時に呼ばれる

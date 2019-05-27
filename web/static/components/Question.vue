@@ -1,10 +1,18 @@
 <template>
   <div>
-    <div class="page-title">
-      {{ question.title }}
+    <div v-if="question.userId === LoginId">
+      <div>Hogehoge</div>
     </div>
-    <div class="body">
-      {{ question.body }}
+
+    <!-- ログインidが一致していた場合 -->
+    <div v-else>
+      <div class="page-title">
+        {{ question.title }}
+      </div>
+
+      <div class="body">
+        {{ question.body }}
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +32,12 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  data() {
+    return {
+      LoginId: this.$store.state.id,
+    };
   },
 };
 </script>

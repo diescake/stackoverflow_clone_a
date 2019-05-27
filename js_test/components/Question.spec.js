@@ -42,7 +42,14 @@ describe('Question', function () {
       propsData: {
         question,
       },
+
+      data() {
+        return {
+          LoginId: '5aef02ae36000036000cd039',
+        };
+      },
     });
+
     assert(wrapper.find('.page-title').text().includes(question.title));
     assert(wrapper.find('.body').text().includes(question.body));
   });
